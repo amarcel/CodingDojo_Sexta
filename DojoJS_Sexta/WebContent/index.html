@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+// Decclaração de variaveis
+var n1, n2, media;
+
+function verificar_notas(){
+	//objetos javascript dos componentes:
+	campoNota1 = document.getElementById('nota1');
+	campoNota2 = document.getElementById('nota2');
+	campoResultado = document.getElementById('resultado');
+	// pegar valor
+	n1 = parseFloat( campoNota1.value );
+	n2 = parseFloat( campoNota2.value );
+	
+	media=(n1+n2)/2;
+	
+	//verificação	
+	if (media >= 7) {
+		campoResultado.innerHTML = "Aluno Aprovado com Média: "+media;
+		campoResultado.style.color = "blue";
+	} else if (media >= 4 && media < 7) {
+		campoResultado.innerHTML = "Aluno Prova Final com Média: "+media;
+		campoResultado.style.color = "green";		
+	} else {
+		campoResultado.innerHTML = "Aluno Reprovado com Média: "+media;
+		campoResultado.style.color = "red";
+	}
+}
+
+function validarNota(nota) {
+	if( ! isNaN(nota) ) {
+		if(nota >= 0 && nota <= 10) {
+			return true;
+		} 
+	} 
+	return false;
+}
+
+function controleNota( campo ) {
+	nota = parseFloat( campo.value );
+	botaVerificar = document.getElementById('btnverificar');
+	
+	if( validarNota(nota) ) {
+		campo.style.background = "#00AA00";
+		botaVerificar.disabled = false;
+	} else {
+		campo.style.background = "lightcoral";
+		botaVerificar.disabled = true;
+	}
+}
+
+</script>
+
+</head>
+<body>
+<h2 class="vermelho">SIMULAÇÃO DE NOTAS</h2>
+<p>Informe a Nota da 1ª NI:</p>
+<input type= "text" id="nota1" onblur="controleNota(this)" />
+<br/>
+<p>Informe a Nota da 2ª NI:</p>
+<input type= "text" id="nota2" onblur="controleNota(this)" />
+<br/>
+<br/>
+<input type= "button" value= "Verificar" id="btnverificar" onclick="verificar_notas()" disabled/>
+<p id="resultado"></p>
+
+
+</body>
+</html>
